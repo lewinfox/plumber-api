@@ -1,11 +1,13 @@
 #!/bin/sh
 
+# Resources for getopts: https://sookocheff.com/post/bash/parsing-bash-script-arguments-with-shopts/
+
 # Check to see if the -p flag has been provided
 while getopts ":p:" arg; do
   case $arg in
      p) PORT=${OPTARG}  # -p has been given with an argument
         ;;
-    \?) echo "Invalid option: -${OPTARG}" >&2  # An unrecognised option has been given
+    \?) echo "Usage: run-app -p <port> (or just run-app if you want an auto-assigned port)"
         exit 1
         ;;
      :) echo "Option -${OPTARG} requires a port number." >&2  # -p has been given without an argument
