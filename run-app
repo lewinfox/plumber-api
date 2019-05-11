@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# Check to see if the -p flag has been provided
+while getopts ":p:" arg; do
+  case $arg in
+     p) PORT=${OPTARG}  # -p has been given with an argument
+        ;;
+    \?) echo "Invalid option: -${OPTARG}" >&2  # An unrecognised option has been given
+        exit 1
+        ;;
+     :) echo "Option -${OPTARG} requires a port number." >&2  # -p has been given without an argument
+        exit 1
+  esac
+done
+
+Rscript r/run-app.R $PORT
+
